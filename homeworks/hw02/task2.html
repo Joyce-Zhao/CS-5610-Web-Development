@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task2 for HW02</title>
+  <style>
+    * {
+      text-align: center;
+      font-family: verdana;
+    }
+
+    body {
+      background-color: lightgray;
+    }
+
+    h1 {
+      font-size: 300%;
+    }
+
+    h2 {
+      font-size: 200%;
+      color: tomato;
+    }
+
+    p {
+      color: tomato;
+      font-size: 150%;
+    }
+
+    .button {
+      width: 200px;
+      padding: 10px 15px;
+      border: lightblue thick solid;
+      font-size: 150%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Task2 for HW02</h1>
+  <br>
+  <h2 id="number">10</h2>
+  <button class="button" id="Alert">Alert</button>
+  <button class="button" id="Increment">Increment</button>
+  <button class="button" id="Append">Append</button>
+  <br>
+  <h2>
+    <a href="http://hw02.joyce-z.com/">Back to HW02</a>
+  </h2>
+  <h2>
+    <a href="http://joyce-z.com/">Back to homepage</a>
+  </h2>
+  <script>
+    (
+      function() {
+        "use strict";
+        var num = document.querySelector('h2#number');
+        var body = document.querySelector('body');
+
+        function popAlert() {
+          alert(num.innerText);
+        }
+
+        function increNumber() {
+          num.innerText++;
+        }
+
+        function appendParagraph() {
+          var paragraph = document.createElement("P");
+          var t = document.createTextNode(num.innerText);
+          paragraph.appendChild(t);
+          document.body.appendChild(paragraph);
+        }
+
+        function init() {
+          var btn1 = document.getElementById("Alert");
+          var btn2 = document.getElementById("Increment");
+          var btn3 = document.getElementById("Append");
+          btn1.addEventListener("click", popAlert);
+          btn2.addEventListener("click", increNumber);
+          btn3.addEventListener("click", appendParagraph);
+        }
+
+        window.addEventListener("load", init);
+      })();
+  </script>
+
+</body>
+
+</html>
