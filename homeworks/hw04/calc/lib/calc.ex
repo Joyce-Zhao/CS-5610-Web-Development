@@ -9,7 +9,12 @@
 ## The basic idea of how to implement the calculator comes from:
 ## https://leetcode.com/problems/basic-calculator-iii/discuss/113598/
 ## which implements a basic calculator in java
+
+## Code implementation refers to classmate's work:
+## https://github.com/luqiwang/CS5610/tree/master/calc
+
 defmodule  Calc do
+
   def eval(exp) do
     exp
     |> data_processing
@@ -26,11 +31,11 @@ defmodule  Calc do
     |> List.flatten()
   end
 
-  def split_operator(chars) do
-    if length(chars) > 1 && chars < "0" do
-      String.codepoints(chars)
+  def split_operator(ops) do
+    if length(ops) > 1 && ops < "0" do
+      String.codepoints(ops)
     else
-      chars
+      ops
     end
   end
 
@@ -41,17 +46,17 @@ defmodule  Calc do
         is_number(head) ->
           num = String.to_integer(head)
           numStack = numStack ++ [num]
-          head == "(" -> opStack = opStack ++ [head]
-          head == ")" -> {numStack, opStack} = paren(numStack, opStack)
-          head == "+" || head == "-" || head == "*" || head == "/" -> {numStack, opStack} = choose_operator(numStack, opStack, head)
-          end
-          calculate(tail, numStack, opStack)
-          length(tail) == 0 && length(opStack) > 0 ->
-            {numStack, opStack} = stack_calculation(numStack, opStack)
-            calculate(tail, numStack, opStack)
-            length(tail) == 0 && length(opStack) == 0 -> List.first(numStack)
-          end
-        end
+        head == "(" -> opStack = opStack ++ [head]
+        head == ")" -> {numStack, opStack} = paren(numStack, opStack)
+        head == "+" || head == "-" || head == "*" || head == "/" -> {numStack, opStack} = choose_operator(numStack, opStack, head)
+      end
+      calculate(tail, numStack, opStack)
+    length(tail) == 0 && length(opStack) > 0 ->
+      {numStack, opStack} = stack_calculation(numStack, opStack)
+      calculate(tail, numStack, opStack)
+    length(tail) == 0 && length(opStack) == 0 -> List.first(numStack)
+  end
+end
 
         def is_number(x) do
           if x >= "0" do
