@@ -10,7 +10,7 @@
 ## https://leetcode.com/problems/basic-calculator-iii/discuss/113598/
 ## which implements a basic calculator in java
 
-## Code implementation refers to classmate's work:
+## The implementation was too hard for me. So I refer to classmate's work:
 ## https://github.com/luqiwang/CS5610/tree/master/calc
 
 defmodule  Calc do
@@ -43,16 +43,14 @@ defmodule  Calc do
     if length(list) > 0 do
       [head | tail] = list
       cond do
-        is_number(head) ->
-          num = String.to_integer(head)
+        is_number(head) -> num = String.to_integer(head)
           numStack = numStack ++ [num]
         head == "(" -> opStack = opStack ++ [head]
         head == ")" -> {numStack, opStack} = paren(numStack, opStack)
         head == "+" || head == "-" || head == "*" || head == "/" -> {numStack, opStack} = choose_operator(numStack, opStack, head)
       end
       calculate(tail, numStack, opStack)
-    length(tail) == 0 && length(opStack) > 0 ->
-      {numStack, opStack} = stack_calculation(numStack, opStack)
+    length(tail) == 0 && length(opStack) > 0 -> {numStack, opStack} = stack_calculation(numStack, opStack)
       calculate(tail, numStack, opStack)
     length(tail) == 0 && length(opStack) == 0 -> List.first(numStack)
   end
@@ -115,7 +113,7 @@ end
                 end
 
                 def main() do
-                  case IO.gets("input: ") do
+                  case IO.gets("> ") do
                     :eof ->
                       IO.puts "All done"
                       {:error, reason} ->
