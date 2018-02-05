@@ -32,31 +32,33 @@ defmodule  Calc do
   end
 
   def split_operator(ops) do
-    if length(ops) > 1 && ops < "0" do
-      String.codepoints(ops)
-    else
-      ops
+    cond do
+      length(ops) > 1 && ops <= "0" ->
+        String.codepoints(ops)
+        true -> ops
     end
   end
 
   def calculate(list,numStack,opStack) do
-    if length(list) > 0 do
-      [head | tail] = list
+    cond do
+      length(list) > 0 ->
+      [head | list] = list
       cond do
-        is_number(head) -> num = String.to_integer(head)
+        yn_number(head) -> num = String.to_integer(head)
           numStack = numStack ++ [num]
         head == "(" -> opStack = opStack ++ [head]
         head == ")" -> {numStack, opStack} = paren(numStack, opStack)
         head == "+" || head == "-" || head == "*" || head == "/" -> {numStack, opStack} = choose_operator(numStack, opStack, head)
+        true -> "error"
       end
-      calculate(tail, numStack, opStack)
-    length(tail) == 0 && length(opStack) > 0 -> {numStack, opStack} = stack_calculation(numStack, opStack)
-      calculate(tail, numStack, opStack)
-    length(tail) == 0 && length(opStack) == 0 -> List.first(numStack)
+      calculate(list, numStack, opStack)
+    length(list) == 0 && length(opStack) > 0 -> {numStack, opStack} = stack_calculation(numStack, opStack)
+      calculate(list, numStack, opStack)
+    length(list) == 0 && length(opStack) == 0 -> List.first(numStack)
   end
 end
 
-        def is_number(x) do
+        def yn_number(x) do
           if x >= "0" do
             true
           else
