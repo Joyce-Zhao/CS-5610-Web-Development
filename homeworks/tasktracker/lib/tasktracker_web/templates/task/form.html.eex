@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <p>Creating task As: <%= @current_user.name %></p>
-    <%= hidden_input f, :user_id, class: "form-control" %>
+    <%= hidden_input f, :user_id, class: "form-control", value: @current_user.id %>
     <%= error_tag f, :user_id %>
   </div>
 

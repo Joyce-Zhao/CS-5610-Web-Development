@@ -21,10 +21,10 @@ mix deps.get
 (cd assets && npm install)
 (cd assets && ./node_modules/brunch/bin/brunch b -p)
 mix phx.digest
+mix release --env=prod
 mix ecto.create
 mix ecto.migrate
 
-mix release --env=prod
 
 
 mkdir -p ~/www
