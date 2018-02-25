@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export PORT=5100
+export PORT=5200
 export MIX_ENV=prod
-export GIT_PATH=/home/tasktracker/src/tasktracker 
+export GIT_PATH=/home/tasktracker/src/tasktracker
 
 PWD=`pwd`
 if [ $PWD != $GIT_PATH ]; then
@@ -21,7 +21,11 @@ mix deps.get
 (cd assets && npm install)
 (cd assets && ./node_modules/brunch/bin/brunch b -p)
 mix phx.digest
+mix ecto.create
+mix ecto.migrate
+
 mix release --env=prod
+
 
 mkdir -p ~/www
 mkdir -p ~/old
