@@ -5,7 +5,7 @@ Design Choices:
   * We have two initial resources: Users and Tasks.
   * Added actions: Register, Log in / Log out.
   * When not logged in, show a log in link. When logged in, show log out link.
-  * When not logged in, directly go to /tasks won't see anything.
+  * When not logged in, directly go to /tasks won't see anything.
   * Create Tasks, entering a title and a description, with time spent on the task, the task completed or not, and the assignee.
   * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
   * Create a partial “feed” resource, manually.
