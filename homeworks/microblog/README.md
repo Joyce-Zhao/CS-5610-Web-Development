@@ -4,9 +4,9 @@ Design Choices:
 
   * We have two initial resources: Users and Posts.
   * Added actions: Register, Log in, Log out.
-  * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
+  * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
   * Create a partial “feed” resource, manually.
-  * All posts: listed in reverse order.
+  * All posts: listed in reverse order.
   * After creating post, redirect to /feed.
   * When creating post, use user_id get user name and posting as current user.
 
