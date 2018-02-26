@@ -2,8 +2,8 @@
 
 Design Choices:
 
-  * We have two initial resources: Users and Posts
-  * Added actions: Register, Log in, Log out
+  * We have two initial resources: Users and Posts.
+  * Added actions: Register, Log in, Log out.
   * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
   * Create a partial “feed” resource, manually.
   * All posts: listed in reverse order.
