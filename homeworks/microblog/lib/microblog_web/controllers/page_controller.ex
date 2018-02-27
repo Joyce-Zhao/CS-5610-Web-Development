@@ -9,7 +9,7 @@ defmodule MicroblogWeb.PageController do
   end
 
   def feed(conn, _params) do
-    posts = Enum.reverse(Social.list_posts())
+    posts = Enum.reverse(Social.feed_posts_for(conn.assigns[:current_user]))
     new_post = %Post{ user_id: conn.assigns[:current_user].id}
     changeset = Social.change_post(new_post)
     render conn, "feed.html", posts: posts, changeset: changeset
