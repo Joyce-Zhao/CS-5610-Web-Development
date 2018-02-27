@@ -7,9 +7,27 @@
   </div>
 <% end %>
 
-<h1>Your Feed</h1>
+<h1>Available Assignees</h1>
 
-<%= Enum.map @tasks, fn task -> %>
+<%= Enum.map @users, fn user -> %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Assignee's id: <%= user.id %></h6>
+        <p>Assignee's name: <%= user.name %></p>
+        <p>Assignee's email: <%= user.email %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<br>
+
+<h1>Created Tasks</h1>
+
+<%= Enum.map @tasks_created, fn task -> %>
 <div class="row">
   <div class="col">
     <div class="card">
@@ -19,6 +37,31 @@
         <p>Task title: <%= task.title %></p>
         <p>Time spent: <%= task.timespent %></p>
         <p>Task completed: <%= task.completed %></p>
+        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<br>
+
+<h1>Assigned Tasks</h1>
+
+<%= Enum.map @tasks_assigned, fn task -> %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Creater's name: <%= task.user.name %></h6>
+        <p>Assignee: <%= task.assignee.name %></p>
+        <p>Task title: <%= task.title %></p>
+        <p>Time spent: <%= task.timespent %></p>
+        <p>Task completed: <%= task.completed %></p>
+        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
       </div>
     </div>
   </div>

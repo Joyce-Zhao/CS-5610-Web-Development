@@ -1,6 +1,8 @@
 defmodule TasktrackerWeb.PageController do
   use TasktrackerWeb, :controller
 
+  alias Tasktracker.Accounts
+  alias Tasktracker.Accounts.User
   alias Tasktracker.Issue
   alias Tasktracker.Issue.Task
 
@@ -9,9 +11,21 @@ defmodule TasktrackerWeb.PageController do
   end
 
   def feed(conn, _params) do
-    tasks = Issue.list_tasks()
-    new_task = %Task{ user_id: conn.assigns[:current_user].id}
+    users = Accounts.list_users()
+    tasks = Enum.reverse(Issue.list_tasks())
+    current_user = conn.assigns[:current_user]
+    new_task = %Task{ user_id: current_user.id}
     changeset = Issue.change_task(new_task)
-    render conn, "feed.html", tasks: tasks, changeset: changeset
+
+    tasks_created = Enum.filter(tasks, fn (task) ->
+      task.user_id == current_user.id
+    end)
+
+    tasks_assigned = Enum.filter(tasks, fn(task) ->
+      task.assignee_id == current_user.id
+    end)
+
+    render conn, "feed.html", users: users, tasks: tasks, tasks_created: tasks_created,
+           tasks_assigned: tasks_assigned, changeset: changeset
   end
 end

@@ -18,7 +18,7 @@
           <%= if @current_user do %>
             <p>
               Logged in as: <%= @current_user.name %> |
-              <%= link "Log Out", to: "/session", method: :delete %>
+              <%= link "Log out", to: "/session", method: :delete %>
             </p>
           <% else %>
             <p>
