@@ -16,3 +16,45 @@ You can also run your app inside IEx (Interactive Elixir) as:
 
 
 mix phx.gen.html Accounts User users email:string name:string
+
+Install dependencies with mix deps.get
+Create and migrate your database with mix ecto.create && mix ecto.migrate
+Install Node.js dependencies with cd assets && npm install
+Start Phoenix endpoint with mix phx.server
+
+
+Deployment on VPS:
+
+git clone project to ~/src/
+
+add "{:distillery, "~> 1.5", runtime: false}" in tasktracker/mix.exs "defp deps do ... end" $ mix deps.get
+
+$ cd assets && $ npm install --save bootstrap popper.js jquery $ npm install --save-dev sass-brunch
+
+create DB user (tasktracker) on VPS, remeber its password (pw). ( manually move prod.secret.exs file to tasktracker/config/) configure DB user and password in prod.secret.exs
+
+in config/prod.exs, add "server: true," before "load_from_system_env: true"
+
+tasktracker@vps:/src/tasktracker $ MIX_ENV=prod mix ecto.create tasktracker@vps:/src/tasktracker $ MIX_ENV=prod mix ecto.migrate
+
+modify the project name to "tasktracker" and port number in deploy.sh and start.sh
+
+configure the tasktracker.nginx in sites-available/ and sites-enabled/ sudo service nginx restart
+
+$ mix release.init $ mix release
+
+$ ./deploy.sh $ ./start.sh
+
+
+
+
+
+cp /home/joyce/projects/homeworks/tasktracker/deploy.sh ./
+cp /home/joyce/projects/homeworks/tasktracker/lib/tasktracker_web/templates/layout/app.html.eex ./lib/tasktracker_web/templates/layout
+
+cd /etc/nginx/sites-available
+sudo cp memory.joyce-z.com tasks1.joyce-z.com
+sudo vi tasks1.joyce-z.com
+sudo service nginx reload
+sudo ln -s /etc/nginx/sites-available/tasks1.joyce-z.com /etc/nginx/sites-enabled
+sudo service nginx reload
