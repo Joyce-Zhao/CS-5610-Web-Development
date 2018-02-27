@@ -12,7 +12,7 @@ Design Choices:
   * Create a partial “feed” resource, manually.
   * All tasks: listed in reverse order. Only show tasks related(created/assigned) to current user.
   * When creating task, use user_id get user name and creating as current user.
-  * In the feed page, show available assignees' id for the creator's convenience.
+  * In the feed page, show available assignees' id for the creator's convenience.
   * In the feed page, show the tasks created by the current user and the tasks assigned to the current user.
   * After creating task, redirect to /feed.
 
