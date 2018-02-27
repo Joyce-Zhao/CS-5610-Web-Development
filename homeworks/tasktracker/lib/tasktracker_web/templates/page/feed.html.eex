@@ -32,7 +32,7 @@
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Creater's name: <%= task.user.name %></h6>
+        <h6 class="card-title">Creator's name: <%= task.user.name %></h6>
         <p>Assignee: <%= task.assignee.name %></p>
         <p>Task title: <%= task.title %></p>
         <p>Time spent: <%= task.timespent %></p>
@@ -55,7 +55,7 @@
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Creater's name: <%= task.user.name %></h6>
+        <h6 class="card-title">Creator's name: <%= task.user.name %></h6>
         <p>Assignee: <%= task.assignee.name %></p>
         <p>Task title: <%= task.title %></p>
         <p>Time spent: <%= task.timespent %></p>

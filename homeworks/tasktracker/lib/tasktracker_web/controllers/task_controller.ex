@@ -7,10 +7,13 @@ defmodule TasktrackerWeb.TaskController do
   def index(conn, _params) do
     tasks = Enum.reverse(Issue.list_tasks())
     current_user = conn.assigns[:current_user]
-
-    tasks_related = Enum.filter(tasks, fn (task) ->
-      task.user_id == current_user.id or task.assignee_id == current_user.id
-    end)
+    if current_user do
+      tasks_related = Enum.filter(tasks, fn (task) ->
+        task.user_id == current_user.id or task.assignee_id == current_user.id
+      end)
+    else
+      tasks_related = tasks
+    end
 
     render(conn, "index.html", tasks: tasks_related)
   end
