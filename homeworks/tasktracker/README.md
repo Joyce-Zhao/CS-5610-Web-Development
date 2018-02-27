@@ -4,13 +4,16 @@ Design Choices:
 
   * We have two initial resources: Users and Tasks.
   * Added actions: Register, Log in / Log out.
-  * When not logged in, show a log in link. When logged in, show log out link.
-  * When not logged in, directly go to /tasks won't see anything.
-  * Create Tasks, entering a title and a description, with time spent on the task, the task completed or not, and the assignee.
+  * When not logged in, show a log in link in the upper-right corner of the page. When logged in, show log out link.
+  * When not logged in, directly go to /tasks won't be able to edit.
+  * Whetherlogged in or not, directly go to /users won't be able to edit.
+  * To create Tasks: entering a title and a description, with time spent on the task, the task completed or not, and the assignee.
   * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
   * Create a partial “feed” resource, manually.
-  * All tasks: listed in reverse order.
+  * All tasks: listed in reverse order. Only show tasks related(created/assigned) to current user.
   * When creating task, use user_id get user name and creating as current user.
+  * In the feed page, show available assignees' id for the creator's convenience.
+  * In the feed page, show the tasks created by the current user and the tasks assigned to the current user.
   * After creating task, redirect to /feed.
 
 To start your Phoenix server:
