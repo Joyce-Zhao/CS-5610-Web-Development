@@ -6,7 +6,7 @@ Design Choices:
   * Added actions: Register, Log in / Log out.
   * When not logged in, show a log in link in the upper-right corner of the page. When logged in, show log out link.
   * When not logged in, directly go to /tasks won't be able to edit.
-  * Whetherlogged in or not, directly go to /users won't be able to edit.
+  * Whether logged in or not, directly go to /users won't be able to edit other users.
   * To create Tasks: entering a title and a description, with time spent on the task, the task completed or not, and the assignee.
   * Create a partial “session” resource, manually. Two CRUD actions: create and delete.
   * Create a partial “feed” resource, manually.
