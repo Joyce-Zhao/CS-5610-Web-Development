@@ -51,7 +51,7 @@ defmodule Tasktracker.Accounts do
 
   def get_all_users(manager_id) do
     selection = from user in User,
-              where: user.manager_id == ^manager_id && user.id != ^manager_id,
+              where: user.manager_id == ^manager_id,
               select: user.id
     Repo.all(selection)
   end

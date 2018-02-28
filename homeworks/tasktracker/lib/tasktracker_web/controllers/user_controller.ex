@@ -17,15 +17,17 @@ defmodule TasktrackerWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
+    all_users = [0 | Accounts.get_all_users()]
     if Map.get(user_params, "manager_id") == "0" do
         user_params = Map.delete(user_params, "manager_id")
+      end
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, all_users: all_users)
     end
   end
 

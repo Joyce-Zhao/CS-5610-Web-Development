@@ -109,10 +109,10 @@ defmodule Tasktracker.Issue do
   end
 
   def get_tasks_created(id) do
-    query = from task in Task,
+    selection = from task in Task,
               where: task.user_id == ^id,
               select: task
-    Repo.all(query)
+    Repo.all(selection)
     |> Repo.preload(:user)
     |> Repo.preload(:assignee)
   end
