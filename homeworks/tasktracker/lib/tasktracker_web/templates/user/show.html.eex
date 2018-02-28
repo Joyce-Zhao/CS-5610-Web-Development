@@ -12,6 +12,24 @@
     <%= @user.name %>
   </li>
 
+  <li>
+    <strong>Manager:</strong>
+    <%= if @user.manager do %>
+    <%=  @user.manager.name %>
+    <%= else %>
+    <p>do not have a manager yet</p>
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Underlings:</strong>
+    <ul>
+      <%= for underling <- @user.underlings do %>
+      <li><%= underling.name %></li>
+      <% end %>
+    </ul>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>

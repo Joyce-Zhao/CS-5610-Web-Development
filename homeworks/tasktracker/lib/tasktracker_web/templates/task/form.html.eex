@@ -37,7 +37,7 @@
 
   <div class="form-group">
     <%= label f, :assignee_id, class: "control-label" %>
-    <%= number_input f, :assignee_id, class: "form-control" %>
+    <%= select f, :assignee_id, @all_users, class: "form-control" %>
     <%= error_tag f, :assignee_id %>
   </div>
 

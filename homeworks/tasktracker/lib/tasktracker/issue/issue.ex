@@ -107,4 +107,13 @@ defmodule Tasktracker.Issue do
   def change_task(%Task{} = task) do
     Task.changeset(task, %{})
   end
+
+  def get_tasks_created(id) do
+    query = from task in Task,
+              where: task.user_id == ^id,
+              select: task
+    Repo.all(query)
+    |> Repo.preload(:user)
+    |> Repo.preload(:assignee)
+  end
 end

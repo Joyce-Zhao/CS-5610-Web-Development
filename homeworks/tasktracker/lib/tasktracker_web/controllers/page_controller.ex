@@ -14,6 +14,7 @@ defmodule TasktrackerWeb.PageController do
     users = Accounts.list_users()
     tasks = Enum.reverse(Issue.list_tasks())
     current_user = conn.assigns[:current_user]
+    all_users = Accounts.get_all_users(current_user)
     new_task = %Task{ user_id: current_user.id}
     changeset = Issue.change_task(new_task)
 
@@ -26,6 +27,6 @@ defmodule TasktrackerWeb.PageController do
     end)
 
     render conn, "feed.html", users: users, tasks: tasks, tasks_created: tasks_created,
-           tasks_assigned: tasks_assigned, changeset: changeset
+           tasks_assigned: tasks_assigned, changeset: changeset, all_users: all_users
   end
 end

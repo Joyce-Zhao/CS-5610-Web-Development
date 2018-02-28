@@ -35,10 +35,32 @@ defmodule Tasktracker.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
-  def get_user(id), do: Repo.get(User, id)
+  def get_user!(id) do
+    Repo.get!(User, id)
+    |> Repo.preload(:manager)
+    |> Repo.preload(:underlings)
+  end
+
+  def get_user(id) do
+    Repo.get(User, id)
+    |> Repo.preload(:manager)
+    |> Repo.preload(:underlings)
+  end
 
   def get_user_by_email(email), do: Repo.get_by(User, email: email)
+
+  def get_all_users(manager_id) do
+    selection = from user in User,
+              where: user.manager_id == ^manager_id && user.id != ^manager_id,
+              select: user.id
+    Repo.all(selection)
+  end
+
+  def get_all_users do
+    selection = from user in User,
+              select: user.id
+    Repo.all(selection)
+  end
 
   @doc """
   Creates a user.

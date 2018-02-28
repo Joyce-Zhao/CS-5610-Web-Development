@@ -3,6 +3,7 @@ defmodule TasktrackerWeb.UserController do
 
   alias Tasktracker.Accounts
   alias Tasktracker.Accounts.User
+  alias Tasktracker.Issue
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -10,11 +11,14 @@ defmodule TasktrackerWeb.UserController do
   end
 
   def new(conn, _params) do
+    all_users = [0 | Accounts.get_all_users()]
     changeset = Accounts.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, all_users: all_users)
   end
 
   def create(conn, %{"user" => user_params}) do
+    if Map.get(user_params, "manager_id") == "0" do
+        user_params = Map.delete(user_params, "manager_id")
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
@@ -27,13 +31,15 @@ defmodule TasktrackerWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
+    tasks = Issue.get_tasks_created(id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
+    all_users = [0 | Accounts.get_all_users()]
     user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    render(conn, "edit.html", user: user, changeset: changeset, all_users: all_users)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do

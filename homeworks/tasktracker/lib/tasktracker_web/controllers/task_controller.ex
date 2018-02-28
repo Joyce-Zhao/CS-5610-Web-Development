@@ -3,6 +3,7 @@ defmodule TasktrackerWeb.TaskController do
 
   alias Tasktracker.Issue
   alias Tasktracker.Issue.Task
+  alias Tasktracker.Accounts
 
   def index(conn, _params) do
     tasks = Enum.reverse(Issue.list_tasks())
@@ -19,12 +20,16 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def new(conn, _params) do
+    current_user = conn.assigns[:current_user]
+    all_users = Accounts.get_all_users(current_user)
+    IO.inspect(all_users)
     changeset = Issue.change_task(%Task{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, all_users: all_users)
   end
 
   def create(conn, %{"task" => task_params}) do
     current_user = conn.assigns[:current_user]
+    all_users = Accounts.get_all_users(current_user)
     task_params = Map.put(task_params, "user_id", current_user.id)
     case Issue.create_task(task_params) do
       {:ok, task} ->
@@ -32,7 +37,7 @@ defmodule TasktrackerWeb.TaskController do
         |> put_flash(:info, "Task created successfully. Now showing your feed.")
         |> redirect(to: page_path(conn, :feed))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, all_users: all_users)
     end
   end
 
@@ -42,9 +47,11 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def edit(conn, %{"id" => id}) do
+    current_user = conn.assigns[:current_user]
+    all_users = Accounts.get_all_users()
     task = Issue.get_task!(id)
     changeset = Issue.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset)
+    render(conn, "edit.html", task: task, changeset: changeset, all_users: all_users)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
