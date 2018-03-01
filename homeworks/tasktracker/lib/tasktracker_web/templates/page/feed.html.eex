@@ -17,6 +17,11 @@
         <h6 class="card-title">Assignee's id: <%= user.id %></h6>
         <p>Assignee's name: <%= user.name %></p>
         <p>Assignee's email: <%= user.email %></p>
+        <%= if user.manager_id do %>
+          <p>Assignee's manager: <%= Tasktracker.Accounts.get_user(user.manager_id).name %></p>
+        <% else %>
+          <p>Assignee's manager: No manager yet</p>
+        <% end %>
       </div>
     </div>
   </div>

@@ -50,16 +50,16 @@ defmodule Tasktracker.Accounts do
   def get_user_by_email(email), do: Repo.get_by(User, email: email)
 
   def get_all_users(manager_id) do
-    selection = from user in User,
-              where: user.manager_id == ^manager_id,
-              select: user.id
-    Repo.all(selection)
+    query = from u in User,
+              where: u.manager_id == ^manager_id,
+              select: u.id
+    Repo.all(query)
   end
 
   def get_all_users do
-    selection = from user in User,
-              select: user.id
-    Repo.all(selection)
+    query = from u in User,
+              select: u.id
+    Repo.all(query)
   end
 
   @doc """
