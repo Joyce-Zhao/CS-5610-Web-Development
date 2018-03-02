@@ -1,0 +1,74 @@
+<%= if @current_user do %>
+  <div class="row">
+    <div class="col">
+      <%= render Tasktracker2Web.TaskView, "form.html",
+          Map.put(assigns, :action, task_path(@conn, :create)) %>
+    </div>
+  </div>
+<% end %>
+
+<h1>Available Assignees</h1>
+
+<%= Enum.map @users, fn user -> %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Assignee's id: <%= user.id %></h6>
+        <p>Assignee's name: <%= user.name %></p>
+        <p>Assignee's email: <%= user.email %></p>
+        <%= if user.manager_id do %>
+          <p>Assignee's manager: <%= Tasktracker2.Accounts.get_user(user.manager_id).name %></p>
+        <% else %>
+          <p>Assignee's manager: No manager yet</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<br>
+
+<h1>Created Tasks</h1>
+
+<%= Enum.map @tasks_created, fn task -> %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Creator's name: <%= task.user.name %></h6>
+        <p>Assignee: <%= task.assignee.name %></p>
+        <p>Task title: <%= task.title %></p>
+        <p>Time spent: <%= task.timespent %></p>
+        <p>Task completed: <%= task.completed %></p>
+        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<br>
+
+<h1>Assigned Tasks</h1>
+
+<%= Enum.map @tasks_assigned, fn task -> %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Creator's name: <%= task.user.name %></h6>
+        <p>Assignee: <%= task.assignee.name %></p>
+        <p>Task title: <%= task.title %></p>
+        <p>Time spent: <%= task.timespent %></p>
+        <p>Task completed: <%= task.completed %></p>
+        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
