@@ -11,6 +11,7 @@ defmodule Tasktracker.Issue.Task do
     field :title, :string
     belongs_to :assignee, Tasktracker.Accounts.User
     belongs_to :user, Tasktracker.Accounts.User
+    has_many :timeblocks ,Tasktracker.Issue.Timeblock, foreign_key: :task_id
 
     timestamps()
   end

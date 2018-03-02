@@ -18,7 +18,8 @@
       <div class="col-9">
         <p class="p-4">
           <a href="/feed">Feed</a> |
-          <a href="/users">All Users</a>
+          <a href="/users">All Users</a> |
+          <a href="/tasks">All Tasks</a>
         </p>
       </div>
       <div class="col-3">
@@ -35,7 +36,7 @@
       </div>
       <% end %>
     </div>
-    
+
     <%= if get_flash(@conn, :info) do %>
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <% end %>

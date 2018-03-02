@@ -43,7 +43,8 @@ defmodule TasktrackerWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Issue.get_task!(id)
-    render(conn, "show.html", task: task)
+    allblocks = Tasktracker.Issue.blocks_map_for(task.id)
+    render(conn, "show.html", task: task, allblocks: allblocks)
   end
 
   def edit(conn, %{"id" => id}) do

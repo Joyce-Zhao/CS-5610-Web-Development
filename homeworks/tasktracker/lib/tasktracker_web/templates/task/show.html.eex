@@ -1,3 +1,8 @@
+<script>
+window.timeblock_path = "<%= timeblock_path(@conn, :index) %>";
+window.task_id = "<%= @task.id %>"
+</script>
+
 <h2>Show Task</h2>
 
 <ul>
@@ -35,4 +40,45 @@
 </ul>
 
 <span><%= link "Edit", to: task_path(@conn, :edit, @task) %></span>
+<br>
 <span><%= link "Back", to: task_path(@conn, :index) %></span>
+
+<br>
+<div class="form-group">
+  <span>Start Time: <input class="form-control" id="start-time"></input></span>
+</div>
+<div class="form-group">
+  <span>End Time: <input class="form-control" id="end-time"></input></span>
+</div>
+
+<button class="btn btn-primary" onclick="add_time_block()">
+Add block
+</button>
+
+<button class="btn btn-primary"  id="start-button" data-start="false">
+  Start Working
+</button>
+<h3>Work Log (UTC Time)</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Time Spent</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="blocks">
+    <%= for timeblock <- @allblocks do %>
+      <%= if timeblock != nil do %>
+      <tr id = "<%= "b"<>Integer.to_string(timeblock.id) %>" class="block-row">
+        <% period = DateTime.diff(timeblock.end_time, timeblock.start_time, :second) %>
+        <% mins = System.convert_time_unit(period, :second, :minute) %>
+        <th><%= timeblock.start_time %></th>
+        <th><%= timeblock.end_time %></th>
+        <th><%= mins %>minutes</th>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
