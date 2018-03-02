@@ -73,7 +73,7 @@ Add block
       <%= if timeblock != nil do %>
       <tr id = "<%= "b"<>Integer.to_string(timeblock.id) %>" class="block-row">
         <% period = DateTime.diff(timeblock.end_time, timeblock.start_time, :second) %>
-        <% mins = System.convert_time_unit(period, :second, :minute) %>
+        <% mins = Integer.floor_div(period, 60) %>
         <th><%= timeblock.start_time %></th>
         <th><%= timeblock.end_time %></th>
         <th><%= mins %>minutes</th>

@@ -26,8 +26,8 @@ import $ from "jquery";
 function start(task_id) {
   let text = JSON.stringify({
     timeblock: {
-      start_time: Date.now(),
-      end_time: Date.now(),
+      start_time: new Date(),
+      end_time: new Date(0),
       task_id: task_id
     },
   })
@@ -44,7 +44,7 @@ function start(task_id) {
 function end(timeblock_id) {
   let text = JSON.stringify({
     timeblock: {
-      end_time: Date.now()
+      end_time: new Date()
     },
   })
   $.ajax(timeblock_path + "/" + timeblock_id, {
@@ -64,7 +64,6 @@ function set_button(timeblock_id) {
     btn.data("timeblock_id", timeblock_id)
   } else {
     btn.data("start", false);
-    getBlock(timeblock_id);
   }
   update_button();
 }
@@ -74,6 +73,7 @@ function update_button() {
   if (!btn.data("start")) {
     btn.text("Start Working")
     btn.attr('class', 'btn btn-primary')
+    location.reload()
   } else {
     btn.text("Stop Working ")
     btn.attr('class', 'btn btn-warning')

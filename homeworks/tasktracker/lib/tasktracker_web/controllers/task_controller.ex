@@ -44,6 +44,8 @@ defmodule TasktrackerWeb.TaskController do
   def show(conn, %{"id" => id}) do
     task = Issue.get_task!(id)
     allblocks = Tasktracker.Issue.blocks_map_for(task.id)
+    IO.puts("************")
+    IO.inspect(allblocks)
     render(conn, "show.html", task: task, allblocks: allblocks)
   end
 

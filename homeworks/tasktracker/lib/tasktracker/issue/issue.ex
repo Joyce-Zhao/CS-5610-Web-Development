@@ -214,9 +214,9 @@ defmodule Tasktracker.Issue do
   end
 
   def blocks_map_for(id) do
-    Repo.all(from t in Time，
-      where: t.task_id == ^id）
-    |> Enum.map(&({&1.task_id, &1.id}))
-    |> Enum.into(%{})
+    Repo.all(from t in Timeblock,
+      where: t.task_id == ^id)
+    # |> Enum.map(&({&1.task_id, &1.id}))
+    # |> Enum.into(%{})
   end
 end
