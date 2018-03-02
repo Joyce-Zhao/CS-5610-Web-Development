@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PORT=5200
+export PORT=5202
 export MIX_ENV=prod
 export GIT_PATH=/home/tasktracker2/src/tasktracker2
 

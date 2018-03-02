@@ -45,7 +45,9 @@ $ mix release.init $ mix release
 
 $ ./deploy.sh $ ./start.sh
 
+cd /etc/nginx/sites-available
 
+tasktracker2@joycezhao:~/src$ cp -R /home/joyce/projects/homeworks/tasktracker2 ./
 
 scp prod.secret.exs tasktracker@joyce-z.com:src/tasktracker/config/
 
