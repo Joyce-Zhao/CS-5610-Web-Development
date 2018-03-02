@@ -47,7 +47,7 @@ $ ./deploy.sh $ ./start.sh
 
 
 
-
+scp prod.secret.exs tasktracker@joyce-z.com:src/tasktracker/config/
 
 cp /home/joyce/projects/homeworks/tasktracker/deploy.sh ./
 cp /home/joyce/projects/homeworks/tasktracker/lib/tasktracker_web/templates/layout/app.html.eex ./lib/tasktracker_web/templates/layout
