@@ -15,6 +15,9 @@ Design Choices:
   * In the feed page, show available assignees' id for the creator's convenience.
   * In the feed page, show the tasks created by the current user and the tasks assigned to the current user.
   * After creating task, redirect to /feed.
+  * Added navigation bar to feed and all users and all tasks.
+  * Only a manager can edit their underlings and assign them tasks.
+  * When click on "show" to show tasks, workers will be able to start working on certain task by clicking "start working".
 
 To start your Phoenix server:
 
